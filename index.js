@@ -1,6 +1,9 @@
 const express = require('express');
 const app = express();
 
+// Settings
+app.set('APP_NAME', 'Fazt express tutorial');
+
 // Para uso de JSON´s
 app.use(express.json());
 
@@ -40,5 +43,6 @@ app.delete('/user', (req, res) => {
 app.use(express.static('public'));
 
 app.listen(3000, () => {
+    console.log(app.get('APP_NAME'));
     console.log('Server on port 3000');
 });
