@@ -4,6 +4,12 @@ const app = express();
 // Para uso de JSON´s
 app.use(express.json());
 
+// Estructura básica de un Middleware
+app.use((req, res, next) => {
+    console.log(`Middleware logger ${req.protocol}://${req.get('host')}${req.originalUrl}`);
+    next();
+});
+
 app.get('/user', (req, res) => {
     res.json({
         'username': 'Cameron',
@@ -30,6 +36,8 @@ app.put('/user', (req, res) => {
 app.delete('/user', (req, res) => {
     res.send('Hello delete');
 });
+
+app.use(express.static('public'));
 
 app.listen(3000, () => {
     console.log('Server on port 3000');
