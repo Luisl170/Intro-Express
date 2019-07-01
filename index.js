@@ -3,6 +3,8 @@ const app = express();
 
 // Settings
 app.set('APP_NAME', 'Fazt express tutorial');
+// Seteo de view engine EJS
+app.set('view engine', 'ejs');
 
 // Para uso de JSON´s
 app.use(express.json());
@@ -11,6 +13,12 @@ app.use(express.json());
 app.use((req, res, next) => {
     console.log(`Middleware logger ${req.protocol}://${req.get('host')}${req.originalUrl}`);
     next();
+});
+
+app.get('/', (req, res) => {
+    const users = [{name: 'John'},{name: 'Kafka'},{name: 'Dragon'}];
+    // Rendereo de plantilla ejs
+    res.render('index.ejs', {users});
 });
 
 app.get('/user', (req, res) => {
